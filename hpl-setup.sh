@@ -32,3 +32,5 @@ mv hpl-2.3 ~/hpl
 cp ./Make.linux ~/hpl
 cd ~/hpl
 make arch=linux
+
+cp ~/project/HPL.dat ~/hpl/bin/linux
