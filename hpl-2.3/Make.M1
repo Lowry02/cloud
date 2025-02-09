@@ -1,0 +1,9 @@
+# Example Make.Darwin_AArch64 for Mac M1 (ARM-based)
+CC = /usr/bin/clang
+F77 = /usr/bin/clang
+F90 = /usr/bin/clang++
+CFLAGS = -O3 -arch arm64
+FFLAGS = -O3 -arch arm64
+LDFLAGS = -L/usr/local/lib
+LIBS = -lmpi -lfftw3 -lm
+

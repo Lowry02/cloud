@@ -12,6 +12,7 @@ cd ..
 # installing OpenMPI
 wget https://download.open-mpi.org/release/open-mpi/v4.1/openmpi-4.1.4.tar.gz
 tar xf openmpi-4.1.4.tar.gz
+rm openmpi-4.1.4.tar.gz
 cd openmpi-4.1.4
 CFLAGS="-Ofast -march=native" ./configure --prefix=$HOME/opt/OpenMPI
 make -j 16
