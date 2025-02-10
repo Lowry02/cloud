@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # THREADS: number of threads to use
+# - RUNS:number of iterations
 # TEST_FOLDER: log folder
 # NAME: test name
 
@@ -11,6 +12,12 @@ done
 
 if [[ -z "$THREADS" ]]; then
   echo "> THREADS is not defined"
+  echo "> Exiting..."
+  exit 1
+fi
+
+if [[ -z "$RUNS" ]]; then
+  echo "> RUNS is not defined"
   echo "> Exiting..."
   exit 1
 fi
