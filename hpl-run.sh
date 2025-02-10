@@ -44,7 +44,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPI_HOME/lib
 
 # copying the dat and creating the log file
 echo "> Copying dat file"
-cp $DAT $HOME/hpl/bin/linux/HPL.dat
+cp -f $DAT $HOME/hpl/bin/linux/HPL.dat
 
 FILE_NAME=$TEST_FOLDER/hpl_test-$(date +%Y-%m-%d_%H-%M).txt
 echo "> Creating logging file: $FILE_NAME"
