@@ -32,6 +32,10 @@ if [[ -z "$TEST_FOLDER" ]]; then
   exit 1
 fi
 
+# getting the current folder
+PROJECT_FOLDER=$(pwd)
+TEST_FOLDER=$(realpath --relative-to="$HOME" "$TEST_FOLDER")
+
 echo "> Running with:"
 echo "    DAT: $DAT"
 echo "    RUNS: $RUNS"
@@ -50,11 +54,15 @@ FILE_NAME=$TEST_FOLDER/hpl_test-$(date +%Y-%m-%d_%H-%M).txt
 echo "> Creating logging file: $FILE_NAME"
 touch $FILE_NAME
 
+cd $HOME/hpl/bin/linux/
+
 for ((i=1; i<=RUNS; i++)); do
   echo "> Run $i/$RUNS"
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
-  mpirun --bind-to core -np 4 $HOME/hpl/bin/linux/xhpl >> $FILE_NAME
+  mpirun --bind-to core -np 4 xhpl >> $FILE_NAME
 done
+
+cd $PROJECT_FOLDER
 
 echo "> Results saved in $FILE_NAME"
 echo "> END"
