@@ -41,7 +41,7 @@ touch $FILE_NAME
 for ((i=1; i<=RUNS; i++)); do
   echo "> Run $i/$RUNS"
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
-  iperf -x $SERVER >> $FILE_NAME
+  iperf -c $SERVER >> $FILE_NAME
 done
 
 echo "> Results saved in $FILE_NAME"
