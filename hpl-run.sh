@@ -34,7 +34,7 @@ fi
 
 # getting the current folder
 PROJECT_FOLDER=$(pwd)
-TEST_FOLDER=$(realpath --relative-to="$HOME" "$TEST_FOLDER")
+TEST_FOLDER=$(realpath "$TEST_FOLDER")
 
 echo "> Running with:"
 echo "    DAT: $DAT"
