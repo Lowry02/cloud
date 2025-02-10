@@ -4,6 +4,7 @@
 # - DAT: the path of the HPL.dat filedit can have a different name, it will be renamed)
 # - RUNS:number of iterations
 # - TEST_FOLDER: folder in which to save the logs
+# - NAME: name used to identify the test
 
 # reading input variables
 for arg in "$@"; do
@@ -32,6 +33,12 @@ if [[ -z "$TEST_FOLDER" ]]; then
   exit 1
 fi
 
+if [[ -z "$NAME" ]]; then
+  echo "> NAME is not defined"
+  echo "> Exiting..."
+  exit 1
+fi
+
 # getting the current folder
 PROJECT_FOLDER=$(pwd)
 TEST_FOLDER=$(realpath "$TEST_FOLDER")
@@ -50,7 +57,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$MPI_HOME/lib
 echo "> Copying dat file"
 cp -f $DAT $HOME/hpl/bin/linux/HPL.dat
 
-FILE_NAME=$TEST_FOLDER/hpl_test-$(date +%Y-%m-%d_%H-%M).txt
+FILE_NAME=$TEST_FOLDER/hpl_test-$NAME-$(date +%Y-%m-%d_%H-%M).txt
 echo "> Creating logging file: $FILE_NAME"
 touch $FILE_NAME
 
