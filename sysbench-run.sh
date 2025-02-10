@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # THREADS: number of threads to use
-# - RUNS:number of iterations
+# RUNS:number of iterations
 # TEST_FOLDER: log folder
 # NAME: test name
 
@@ -38,7 +38,7 @@ TEST_FOLDER=$(realpath "$TEST_FOLDER")
 
 echo "> Starting Sysbench tests"
 echo "> Running using:"
-echo "    - THREADS: 4"
+echo "    - THREADS: $THREADS"
 echo "    - TEST_FOLDER: $TEST_FOLDER"
 echo "    - NAME: $NAME"
 
