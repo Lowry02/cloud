@@ -51,7 +51,7 @@ for ((i=1; i<=RUNS; i++)); do
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
   echo -e ">> -- [ CPU ]\n" >> $FILE_NAME
   sysbench cpu --threads=$THREADS --cpu-max-prime=100000 run >> $FILE_NAME
-  echo -e ">> -- [ CPU ]\n" >> $FILE_NAME
+  echo -e ">> -- [ MEMORY ]\n" >> $FILE_NAME
   sysbench memory --memory-block-size=1MB --memory-total-size=5G run >> $FILE_NAME
 done
 
