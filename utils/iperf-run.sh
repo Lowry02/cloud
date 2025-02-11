@@ -29,7 +29,7 @@ fi
 
 TEST_FOLDER=$(realpath "$TEST_FOLDER")
 
-echo "> Starting Sysbench tests"
+echo "> Starting Iperf tests"
 echo "> Running using:"
 echo "    - TEST_FOLDER: $TEST_FOLDER"
 echo "    - NAME: $NAME"
