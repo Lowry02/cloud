@@ -64,17 +64,22 @@ fi
 
 PROJECT_FOLDER=$(pwd)
 ./utils/hpl-run.sh DAT=$DAT RUNS=$RUNS TEST_FOLDER=$TEST_FOLDER NAME=$NAME
+echo
 cd $PROJECT_FOLDER
 ./utils/sysbench-run.sh THREADS=$THREADS RUNS=$RUNS TEST_FOLDER=$TEST_FOLDER NAME=$NAME
+echo
 cd $PROJECT_FOLDER
 ./utils/iozone-run.sh RUNS=$RUNS TEST_FOLDER=$TEST_FOLDER NAME=$NAME
+echo
 cd $PROJECT_FOLDER
 if [[ "$NFS_TEST" == "TRUE" ]]; then
   ./utils/iozone-nfs-run.sh
+  echo
   cd $PROJECT_FOLDER
 fi
 if [[ "$NET_TEST" == "TRUE" ]]; then
   ./utils/iperf-run.sh RUNS=$RUNS TEST_FOLDER=$TEST_FOLDER SERVER=$SERVER
+  echo
   cd $PROJECT_FOLDER
 fi
 cd $PROJECT_FOLDER
