@@ -27,7 +27,7 @@ ARG USER_NAME
 ARG PASSWORD
 RUN useradd -ms /bin/bash -G sudo ${USER_NAME}
 RUN echo "${USER_NAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers 
-RUN git clone https://github.com/Lowry02/cloud.git /home/${USER_NAME}/project
+COPY . /home/${USER_NAME}/project
 RUN chown -R ${USER_NAME}:${USER_NAME} /home/${USER_NAME}/project
 USER ${USER_NAME}
 
