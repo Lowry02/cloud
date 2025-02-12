@@ -1,6 +1,6 @@
 #!/bin/bash
 ./run.sh \
-DAT=./utils/hpl-big.dat \
+DAT=./utils/hpl-small.dat \
 RUNS=1 \
 THREADS=2 \
 NET_TEST=FALSE \
