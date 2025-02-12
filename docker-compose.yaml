@@ -1,0 +1,41 @@
+name: "benchmark"
+
+services:
+  container1:
+    container_name: C1
+    image: ubuntu-benchmark
+    build:
+      context: .
+      args:
+        USER_NAME: lorenzo
+    networks:
+      containers_network:
+        ipv4_address: 192.168.56.10
+    mem_limit: 4g
+    cpus: 4
+    cpuset: "0,1,2,3"
+    stdin_open: true
+    tty: true
+
+  container2:
+    container_name: C2
+    image: ubuntu-benchmark
+    build:
+      context: .
+      args:
+        USER_NAME: lorenzo
+    networks:
+      containers_network:
+        ipv4_address: 192.168.56.11
+    mem_limit: 2g
+    cpus: 2
+    cpuset: "0,1"
+    stdin_open: true
+    tty: true
+
+networks:
+  containers_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.56.0/24
