@@ -5,6 +5,7 @@
 # - RUNS: number of iterations
 # - TEST_FOLDER: folder in which to save the logs
 # - NAME: name used to identify the test
+# - THREADS: number of threads to use
 
 # reading input variables
 for arg in "$@"; do
@@ -39,6 +40,12 @@ if [[ -z "$NAME" ]]; then
   exit 1
 fi
 
+if [[ -z "$THREADS" ]]; then
+  echo "> THREADS is not defined"
+  echo "> Exiting..."
+  exit 1
+fi
+
 # getting the current folder
 PROJECT_FOLDER=$(pwd)
 TEST_FOLDER=$(realpath "$TEST_FOLDER")
@@ -66,7 +73,7 @@ cd $HOME/hpl/bin/linux/
 for ((i=1; i<=RUNS; i++)); do
   echo "> Run $i/$RUNS"
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
-  mpirun --bind-to core -np 4 xhpl >> $FILE_NAME
+  mpirun --bind-to core -np $THREADS xhpl >> $FILE_NAME
 done
 
 cd $PROJECT_FOLDER
