@@ -1,36 +1,35 @@
 import re
 import csv
 
-def parse_iperf_output(file_path, output_csv):
-    with open(file_path, 'r') as file:
-        lines = file.readlines()
-    
-    runs = []
-    current_run = {}
-    
+def parse_log_file(log_filename, output_csv):
+    with open(log_filename, 'r') as log_file:
+        lines = log_file.readlines()
+
+    csv_data = []
+    header_found = False
+    run_id = None
+
     for line in lines:
-        run_match = re.match(r">> -- \[ RUN (\d+) \]", line)
-        if run_match:
-            if current_run:
-                runs.append(current_run)  # Store previous run
-            current_run = {"Run": int(run_match.group(1))}
+        line = line.strip()
+        
+        # Detect run ID
+        match = re.match(r">> -- \[ RUN (\d+) \]", line)
+        if match:
+            run_id = match.group(1)
             continue
         
-        data_match = re.match(r"\[\s*\d+\] (\d+\.\d+-\d+\.\d+) sec\s+(\d+) GBytes\s+(\d+) Gbits/sec", line)
-        if data_match:
-            current_run["Interval (sec)"] = data_match.group(1)
-            current_run["Transfer (GBytes)"] = int(data_match.group(2))
-            current_run["Bandwidth (Gbits/sec)"] = int(data_match.group(3))
-    
-    if current_run:
-        runs.append(current_run)  # Store last run
-    
-    # Write to CSV
+        # Capture header
+        if not header_found and "timestamp" in line:
+            header = ["run"] + line.split(",")
+            csv_data.append(header)
+            header_found = True
+            continue
+        
+        # Capture data rows
+        if header_found and re.match(r"^\d{14},", line):
+            csv_data.append([run_id] + line.split(","))
+
+    # Write to CSV file
     with open(output_csv, 'w', newline='') as csv_file:
-        fieldnames = ["Run", "Interval (sec)", "Transfer (GBytes)", "Bandwidth (Gbits/sec)"]
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-        writer.writeheader()
-        for run in runs:
-            writer.writerow(run)
-    
-    print(f"CSV file '{output_csv}' created successfully.")
+        writer = csv.writer(csv_file)
+        writer.writerows(csv_data)
