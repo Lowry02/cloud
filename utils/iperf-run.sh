@@ -36,7 +36,7 @@ echo "    - NAME: $NAME"
 echo "    - SERVER: $SERVER"
 
 # log file creation
-FILE_NAME=$TEST_FOLDER/iperf_test-$(date +%Y-%m-%d_%H-%M).csv
+FILE_NAME=$TEST_FOLDER/iperf_test-$(date +%Y-%m-%d_%H-%M).txt
 touch $FILE_NAME
 
 for ((i=1; i<=RUNS; i++)); do
