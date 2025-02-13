@@ -43,7 +43,7 @@ for ((i=1; i<=RUNS; i++)); do
   echo "> Run $i/$RUNS"
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
   echo timestamp,server_ip,server_port,client_ip,client_port,tag_id,interval,transferred,bandwidth >> $FILE_NAME
-  iperf -c $SERVER -i 1 -t 30 -y C --logfile $FILE_NAME
+  iperf -c $SERVER -i 1 -t 30 -y C --output $FILE_NAME
 
   # iperf -c $SERVER >> $FILE_NAME
 done
