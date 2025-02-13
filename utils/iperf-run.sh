@@ -36,13 +36,16 @@ echo "    - NAME: $NAME"
 echo "    - SERVER: $SERVER"
 
 # log file creation
-FILE_NAME=$TEST_FOLDER/iperf_test-$(date +%Y-%m-%d_%H-%M).txt
+FILE_NAME=$TEST_FOLDER/iperf_test-$(date +%Y-%m-%d_%H-%M).csv
 touch $FILE_NAME
 
 for ((i=1; i<=RUNS; i++)); do
   echo "> Run $i/$RUNS"
   echo -e "\n>> -- [ RUN $i ]\n" >> $FILE_NAME
-  iperf -c $SERVER >> $FILE_NAME
+  echo timestamp,server_ip,server_port,client_ip,client_port,tag_id,interval,transferred,bandwidth >> $FILE_NAME
+  iperf -c $SERVER -i 1 -t 30 -y C --logfile $FILE_NAME
+
+  # iperf -c $SERVER >> $FILE_NAME
 done
 
 echo "> Results saved in $FILE_NAME"
