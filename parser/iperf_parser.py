@@ -1,7 +1,7 @@
 import re
 import csv
 
-def parse_log_file(log_filename, output_csv):
+def parse_iperf_output(log_filename, output_csv):
     with open(log_filename, 'r') as log_file:
         lines = log_file.readlines()
 

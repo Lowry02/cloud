@@ -23,7 +23,7 @@ def parse_sysbench_output(file_path, output_csv):
             continue
         
         if section == "CPU":
-            if "CPU_events_per_sec" in line:
+            if "events per second" in line:
                 current_run["CPU_events_per_sec"] = float(line.split(':')[-1].strip())
             elif "total time" in line:
                 current_run["CPU_total_time"] = float(line.split(':')[-1].strip().replace('s', ''))
